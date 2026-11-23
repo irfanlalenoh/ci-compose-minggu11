@@ -1,47 +1,51 @@
-# WordPress + MariaDB dengan Docker Compose
+# Tugas Minggu 11: CI untuk Repo Compose
 
-Proyek ini menjalankan WordPress dan MariaDB menggunakan Docker Compose serta memeriksa konfigurasi secara otomatis melalui GitHub Actions.
+![CI](https://github.com/USERNAME/ci-compose-minggu11/actions/workflows/compose-check.yml/badge.svg)
 
-## Persiapan
+*Nama:* [Irfan Christiano Aling Lalenoh]
+*NIM:* [202557201080]
+*Mata Kuliah:* Teknologi Open Source
 
-1. Salin `.env.example` menjadi `.env`.
-2. Ganti nilai password pada file `.env`.
-3. Jalankan aplikasi:
+## Deskripsi
+Proyek ini menggunakan GitHub Actions untuk memvalidasi
+konfigurasi Docker Compose WordPress dan MariaDB.
+Pemeriksaan berjalan otomatis setiap ada push ke main
+dan setiap ada Pull Request.
 
-   ```bash
-   docker compose up -d
-   ```
+## Isi Repositori
+- .github/workflows/compose-check.yml
+- docker-compose.yml
+- .env.example
+- .gitignore
+- README.md
 
-4. Buka WordPress melalui `http://localhost:8080`.
-5. Periksa container:
+## Cara Kerja Workflow
+Workflow menggunakan job validate pada ubuntu-latest.
+Tahap pertama mengambil repository, tahap kedua menyalin
+.env.example menjadi .env, dan tahap ketiga memvalidasi
+konfigurasi menggunakan docker compose config -q.
 
-   ```bash
-   docker compose ps
-   ```
+## Bukti
 
-6. Hentikan aplikasi:
+### 1. Run GitHub Actions Berhasil
+![Run Hijau](bukti/1-run-hijau.png)
 
-   ```bash
-   docker compose down
-   ```
+### 2. Pull Request dengan Check Gagal
+![PR Merah](bukti/2-pr-merah.png)
 
-## CI dengan GitHub Actions
+### 3. Badge Status
+![Badge](bukti/3-badge.png)
 
-Workflow berada di `.github/workflows/compose-check.yml`. Workflow berjalan saat ada push ke branch `main` atau Pull Request.
+## Tautan Pull Request
+[https://github.com/irfanlalenoh/ci-compose-minggu11/pull/1]
 
-Job `validate` melakukan tiga hal:
-- Mengambil kode repository.
-- Menyalin `.env.example` menjadi `.env`.
-- Menjalankan `docker compose config -q` untuk memvalidasi konfigurasi tanpa menjalankan container.
+## Kendala dan Solusi
+Kendala yang ditemukan adalah kesalahan indentasi
+pada file docker-compose.yml sehingga proses validasi
+gagal. Solusinya adalah memperbaiki indentasi YAML
+dan menjalankan pemeriksaan kembali.
 
-## Badge Status
-
-Ganti `USERNAME` dan `NAMA_REPO` dengan akun dan nama repository GitHub milikmu, lalu tambahkan ke README:
-
-```markdown
-![Compose Check](https://github.com/USERNAME/NAMA_REPO/actions/workflows/compose-check.yml/badge.svg)
-```
-
-## Keamanan
-
-Jangan pernah mengunggah file `.env` asli ke GitHub. Yang boleh diunggah adalah `.env.example` tanpa password pribadi.
+## Refleksi
+GitHub Actions membantu memeriksa konfigurasi secara
+otomatis setiap ada perubahan. Dengan CI, kesalahan
+dapat diketahui lebih awal sebelum proyek digabungkan.

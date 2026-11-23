@@ -1,0 +1,20 @@
+name: Compose Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Siapkan .env dari contoh
+        run: cp .env.example .env
+
+      - name: Validasi file compose
+        run: docker compose config -q

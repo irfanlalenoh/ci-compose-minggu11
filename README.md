@@ -1,6 +1,6 @@
 # Tugas Minggu 11: CI untuk Repo Compose
 
-![CI](https://github.com/USERNAME/ci-compose-minggu11/actions/workflows/compose-check.yml/badge.svg)
+![CI](https://github.com/irfanlalenoh/ci-compose-minggu11/actions/workflows/compose-check.yml/badge.svg)
 
 *Nama:* [Irfan Christiano Aling Lalenoh]
 *NIM:* [202557201080]
